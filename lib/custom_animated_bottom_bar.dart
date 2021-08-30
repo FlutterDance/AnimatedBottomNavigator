@@ -9,13 +9,13 @@ class CustomAnimatedBottomBar extends StatelessWidget {
     this.showElevation = true,
     this.iconSize = 24,
     this.backgroundColor,
-    this.itemCornerRadius = 50,
-    this.containerHeight = 56,
-    this.animationDuration = const Duration(milliseconds: 270),
+    this.itemCornerRadius = 28,
+    this.containerHeight = 48,
+    this.animationDuration = const Duration(milliseconds: 200),
     this.mainAxisAlignment = MainAxisAlignment.spaceBetween,
     required this.items,
     required this.onItemSelected,
-    this.curve = Curves.linear,
+    this.curve = Curves.easeInOut,
   }) : assert(items.length >= 2 && items.length <= 5),
         super(key: key);
 
@@ -24,7 +24,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
   final Color? backgroundColor;
   final bool showElevation;
   final Duration animationDuration;
-  final List<BottomNavyBarItem> items;
+  final List<MyBottomNavigationBarItem> items;
   final ValueChanged<int> onItemSelected;
   final MainAxisAlignment mainAxisAlignment;
   final double itemCornerRadius;
@@ -50,7 +50,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
         child: Container(
           width: double.infinity,
           height: containerHeight,
-          padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 8),
           child: Row(
             mainAxisAlignment: mainAxisAlignment,
             children: items.map((item) {
@@ -78,7 +78,7 @@ class CustomAnimatedBottomBar extends StatelessWidget {
 class _ItemWidget extends StatelessWidget {
   final double iconSize;
   final bool isSelected;
-  final BottomNavyBarItem item;
+  final MyBottomNavigationBarItem item;
   final Color backgroundColor;
   final double itemCornerRadius;
   final Duration animationDuration;
@@ -101,7 +101,7 @@ class _ItemWidget extends StatelessWidget {
       container: true,
       selected: isSelected,
       child: AnimatedContainer(
-        width: isSelected ? 130 : 50,
+        width: isSelected ? 100 : 50,
         height: double.maxFinite,
         duration: animationDuration,
         curve: curve,
@@ -114,7 +114,7 @@ class _ItemWidget extends StatelessWidget {
           scrollDirection: Axis.horizontal,
           physics: NeverScrollableScrollPhysics(),
           child: Container(
-            width: isSelected ? 130 : 50,
+            width: isSelected ? 100 : 50,
             padding: EdgeInsets.symmetric(horizontal: 8),
             child: Row(
               mainAxisSize: MainAxisSize.max,
@@ -155,9 +155,9 @@ class _ItemWidget extends StatelessWidget {
     );
   }
 }
-class BottomNavyBarItem {
+class MyBottomNavigationBarItem {
 
-  BottomNavyBarItem({
+  MyBottomNavigationBarItem({
     required this.icon,
     required this.title,
     this.activeColor = Colors.blue,
